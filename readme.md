@@ -32,13 +32,29 @@ All six included stage layouts are replicas of the original arcade stages, adapt
 
 Stages live in separate `STAGE n.DAT` files. The game loads them in numerical order and returns to Stage 1 when the next stage file is missing. Custom stages can extend the sequence without changing the game program; keep the stage numbers consecutive.
 
-<!-- Fresh gameplay screenshots and the six-stage YouTube montage will be added here when captured. -->
+| Stage 1 | Stage 2 |
+| --- | --- |
+| ![Stage 1 gameplay](docs/images/stage-1.png) | ![Stage 2 gameplay](docs/images/stage-2.png) |
+| **Stage 3** | **Stage 4** |
+| ![Stage 3 gameplay](docs/images/stage-3.png) | ![Stage 4 gameplay](docs/images/stage-4.png) |
+| **Stage 5** | **Stage 6** |
+| ![Stage 5 gameplay](docs/images/stage-5.png) | ![Stage 6 gameplay](docs/images/stage-6.png) |
+
+*All six kitchens, captured from the game running in a CoCo 3 emulator. Click a screenshot for a closer look.*
 
 ### Build burgers... and watch your step
 
 Walk across each ingredient to make it fall toward its plate. Falling ingredients can knock down other ingredients, with enemies caught underneath or carried along on top. Getting the timing right can turn one drop into a much more satisfying chain reaction!
 
 Hot Dogs, Pickles, and Eggs keep the Chef company. Pepper temporarily stuns them and gives you a way out when the kitchen gets crowded. The game also includes the Ice Cream, Coffee, and Fries bonuses, with an extra pepper awarded when you collect one.
+
+| A little pepper buys some breathing room | Enemies along for the ride |
+| --- | --- |
+| ![Chef using pepper to stun enemies](docs/images/pepper-stun.png) | ![Enemies riding a falling ingredient](docs/images/ingredient-riders.png) |
+
+![Ice Cream bonus on the center ladder](docs/images/bonus.png)
+
+*An Ice Cream bonus on the center ladder. Grab it for another pepper!*
 
 ### Extra Chefs and pepper
 
@@ -52,21 +68,25 @@ The CoCo's `PLAY` command supplies the background melody, stage-start and stage-
 
 The game keeps a **Best Five Players** table with three-character names and scores saved to disk. Beat an entry and you get to put your initials on the board!
 
-![Best Five Players screen preview](docs/images/best-five-preview.png)
+![Best Five Players after the recorded game](docs/images/best-five.png)
 
-*Rendered preview from the BASIC drawing routines; fresh emulator screenshots will replace these previews. The names and scores shown are examples.*
+*WIN takes the top spot with 47,950 points in the recorded game.*
 
 Initials entry gets its own little performance. Use the joystick to choose a letter and the button to select it. The Chef walks beneath the choices, carries each selected character to your name, and celebrates when you finish. **SPA** inserts a space, **RUB** removes the last character, and **END** accepts the entry. Letters and several punctuation marks are available, and you can finish with fewer than three characters.
 
-![Animated initials-entry screen preview](docs/images/initials-preview.png)
+![Initials entry with WIN on the first row](docs/images/initials-entry.png)
 
-*Rendered preview of the initials-entry screen.*
+*Initials entry after the run, with WIN on the first row.*
 
 Scores alternate between `SCORES.DAT` and `SCOREB.DAT`. On startup, the game uses the newest complete, valid table, so an interrupted save can leave the previous successful table available. The game disk needs to be writable to retain scores between sessions. Keep both files when moving your game to a new disk!
 
 ## Why BURGER and TIME are separate programs
 
 `BURGER.BAS` does the preparation: it loads the font, graphics, and music resources, builds the graphics buffers, and presents the **PLAY GAME / MANAGE STAGES** menu. On the Play path, it also loads the saved high-score table before handing control to `TIME.BAS`.
+
+![PLAY GAME and MANAGE STAGES launcher](docs/images/launcher.png)
+
+*One launcher, two ways into the kitchen.*
 
 `TIME.BAS` is the game itself. Keeping the loader separate means all that setup code doesn't have to occupy BASIC program memory while the game runs. The prepared graphics and resident resources remain available across the handoff. When memory is this tight, carrying around code that has already finished its job is a luxury!
 
