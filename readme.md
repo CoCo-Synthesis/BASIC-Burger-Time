@@ -60,9 +60,17 @@ Hot Dogs, Pickles, and Eggs keep the Chef company. Pepper temporarily stuns them
 
 You begin with three Chefs and five peppers. An extra Chef is awarded every **20,000 points**, and completing a stage adds a pepper. The screen tracks your score, the high score, remaining Chefs, pepper supply, and stage progress.
 
-### Music and sound effects
+### Background music and sound effects
 
-The CoCo's `PLAY` command supplies the background melody, stage-start and stage-completion music, ingredient and enemy effects, death music, and extra-life jingle. Playing a tune is easy enough; keeping it moving between BASIC's drawing, collision checks, and ingredient animations took a little more persuasion.
+Choose **2 / PLAY WITH MUSIC** from `BURGER.BAS` to play with a background melody between the Chef's steps and ingredient drops. Both Play options include the stage-start and stage-completion tunes, ingredient and enemy effects, death music, and extra-life jingle.
+
+The CoCo's `PLAY` command supplies the music and sound effects. Playing a tune is easy enough; keeping it moving between BASIC's drawing, collision checks, and ingredient animations took a little more persuasion.
+
+#### Keeping the tune moving in BASIC
+
+BASIC's `PLAY` command pauses the rest of the program while it plays. The background melody is split into very short notes and rests, and a small BASIC routine uses `READ` and `PLAY` to handle one fragment at a time. Calls spread through movement, enemy updates, and the ingredient fall and bounce animations keep the tune moving, with drawing and game logic advancing between notes. The spacing of those calls was tuned to keep a reasonably steady musical rhythm during the action.
+
+Fitting the tune into memory took another BASIC trick. `MUSIC.BIN` holds the melody's DATA alongside the longer sound sequences in unused areas of the CoCo 3's RAM copy of BASIC. `POKE` points BASIC's DATA reader at the resident melody and rewinds it when the tune loops. The game's own BASIC code drives the sequence through the CoCo's built-in `PLAY` routine, while the packed data leaves room for the stages, enemies, and ingredient logic.
 
 ### Best Five Players and initials entry
 
@@ -82,15 +90,23 @@ Scores alternate between `SCORES.DAT` and `SCOREB.DAT`. On startup, the game use
 
 ## Why BURGER and TIME are separate programs
 
-`BURGER.BAS` does the preparation: it loads the font, graphics, and music resources, builds the graphics buffers, and presents the **PLAY GAME / MANAGE STAGES** menu. On the Play path, it also loads the saved high-score table before handing control to `TIME.BAS`.
+`BURGER.BAS` does the preparation: it loads the font, graphics, and music resources, builds the graphics buffers, and loads the saved high-score table before starting the selected game. The main menu offers:
 
-![PLAY GAME and MANAGE STAGES launcher](docs/images/launcher.png)
+```text
+BASIC BURGER TIME
 
-*One launcher, two ways into the kitchen.*
+1 PLAY GAME
+2 PLAY WITH MUSIC
+3 MANAGE STAGES
+```
 
-`TIME.BAS` is the game itself. Keeping the loader separate means all that setup code doesn't have to occupy BASIC program memory while the game runs. The prepared graphics and resident resources remain available across the handoff. When memory is this tight, carrying around code that has already finished its job is a luxury!
+Press **1**, **2**, or **3**, or use the **arrow keys** and **Enter**.
 
-`SCORES.BAS` handles qualifying scores, initials entry, and saving the table before returning to the game. `BTEDIT.BAS` is the Stage Manager. Giving those jobs their own programs keeps each one from having to compete with the entire game for BASIC memory.
+**PLAY GAME** starts `TIME-NM.BAS`. **PLAY WITH MUSIC** starts `TIME.BAS`, adding the background melody. Both editions use the same stages and saved high-score table.
+
+`TIME-NM.BAS` and `TIME.BAS` contain the game itself. Keeping the loader separate means all that setup code doesn't have to occupy BASIC program memory while the game runs. The prepared graphics and resident resources remain available across the handoff. When memory is this tight, carrying around code that has already finished its job is a luxury!
+
+`SCORES.BAS` handles qualifying scores, initials entry, and saving the table before returning to the selected game edition. `BTEDIT.BAS` is the Stage Manager. Giving those jobs their own programs keeps each one from having to compete with the entire game for BASIC memory.
 
 ## What MUSICBLD.BAS solved
 
@@ -154,7 +170,8 @@ The game disk needs these matching files:
 | File | Purpose |
 | --- | --- |
 | `BURGER.BAS` | Start here: resource loader and main menu |
-| `TIME.BAS` | Main game |
+| `TIME-NM.BAS` | Main game: PLAY GAME |
+| `TIME.BAS` | Background-music edition: PLAY WITH MUSIC |
 | `SCORES.BAS` | High-score initials entry and saving |
 | `BTEDIT.BAS` | Stage Manager |
 | `PACTILES.BIN` | Custom font resource reused from BASIC Pac-Man |
@@ -168,7 +185,7 @@ From Disk BASIC, start with:
 RUN"BURGER"
 ```
 
-Choose **1 / PLAY GAME** or **2 / MANAGE STAGES**, or use the arrows and Enter. Start through `BURGER` so the resources are ready before either program runs.
+Choose **1 / PLAY GAME**, **2 / PLAY WITH MUSIC**, or **3 / MANAGE STAGES**, or use the arrows and Enter. Start through `BURGER` so the resources are ready before the selected program runs.
 
 **Repository setup:** the renumbered BASIC programs, stage files, and `MUSIC.BIN` will be uploaded separately by the author. A playable DSK and/or ZIP will also be supplied separately; this initial repository is not yet a complete playable distribution. Distribution BASIC files will have `RENUM0,0,1` applied to conserve memory. `MUSICBLD.BAS` is a development tool, not an additional file players need on the game disk.
 
