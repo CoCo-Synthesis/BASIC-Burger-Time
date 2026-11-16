@@ -121,7 +121,9 @@ This is a development utility, not part of the normal startup procedure. Players
 
 The original arcade stages are only the starting point. Choose **MANAGE STAGES** from the launcher to edit an existing stage or make a new one, using graphical menus and the keyboard.
 
-<!-- Fresh Stage Manager screenshots: Structure mode and Ingredients mode. -->
+| Structure mode | Ingredients mode |
+| --- | --- |
+| ![Stage 1 in Structure mode with a three-tile platform outlined and the terrain choices at right](docs/images/stage-manager-structure.png) | ![Stage 1 in Ingredients mode with a top bun outlined and food, enemies, bonuses, and Chef choices at right](docs/images/stage-manager-ingredients.png) |
 
 ## NEW, LOAD, and SAVE
 
@@ -130,6 +132,10 @@ The original arcade stages are only the starting point. Choose **MANAGE STAGES**
 - **SAVE** writes your stage to one of **15 stage slots**. Empty slots appear in grey, and overwriting an existing stage asks for confirmation.
 
 The editor also asks before discarding unsaved changes for New or Load, and confirms when you leave the manager.
+
+![Stage Manager Save menu with Stage 7 selected and empty slots shown in grey](docs/images/stage-manager-save.png)
+
+*Stage 7 is the first empty save slot on the standard game disk.*
 
 ## Build the kitchen
 
