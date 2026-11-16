@@ -2,6 +2,8 @@
 
 A BurgerTime inspired game written in Extended Color BASIC for the Tandy Color Computer 3, by **CoCo-Synthesis**. Six stages recreated from the arcade original, falling ingredients, hungry enemies, pepper, music, saved high scores... and a Stage Manager so you can build a kitchen of your own!
 
+![Ice Cream bonus on the center ladder](docs/images/bonus.png)
+
 ## After BASIC Pac-Man...
 
 The positive reception of [BASIC Pac-Man](https://github.com/CoCo-Synthesis/BASIC-Pac-Man) left me wanting to try another arcade classic using only Extended Color BASIC. BurgerTime seemed like a good follow-up. Walk around some platforms, climb a few ladders, drop some hamburger ingredients. How hard could it be?
@@ -48,13 +50,10 @@ Walk across each ingredient to make it fall toward its plate. Falling ingredient
 
 Hot Dogs, Pickles, and Eggs keep the Chef company. Pepper temporarily stuns them and gives you a way out when the kitchen gets crowded. The game also includes the Ice Cream, Coffee, and Fries bonuses, with an extra pepper awarded when you collect one.
 
-| A little pepper buys some breathing room | Enemies along for the ride |
-| --- | --- |
-| ![Chef using pepper to stun enemies](docs/images/pepper-stun.png) | ![Enemies riding a falling ingredient](docs/images/ingredient-riders.png) |
+| A little pepper buys some breathing room | Enemies along for the ride | An Ice Cream bonus on the center ladder |
+| --- | --- | --- |
+| ![Chef using pepper to stun enemies](docs/images/pepper-stun.png) | ![Enemies riding a falling ingredient](docs/images/ingredient-riders.png) | ![Ice Cream bonus on the center ladder](docs/images/bonus.png) |
 
-![Ice Cream bonus on the center ladder](docs/images/bonus.png)
-
-*An Ice Cream bonus on the center ladder. Grab it for another pepper!*
 
 ### Extra Chefs and pepper
 
